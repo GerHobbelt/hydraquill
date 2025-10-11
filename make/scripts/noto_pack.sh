@@ -10,7 +10,7 @@ cd res/noto/files || exit
 # crawl the fonts to build a file info header
 for f in *; do
     size=$(wc -c < "$f")
-    checksum=$(shasum -a 256 -b < "$f" | head -c 64)
+    checksum=$(sha256sum -b < "$f" | head -c 64)
     # append font files info to the blob
     printf "%s\x00" "$f" >> ../noto.bin
     printf "%08x" "$size" | xxd -r -p >> ../noto.bin
